@@ -2,11 +2,11 @@ class CaixaDaLanchonete {
 
     calcularValorDaCompra(metodoDePagamento, itens) {
         
-        total = retornaValorTotalItem(itens)
+        var total = retornaValorTotalItem(itens)
         
         if (metodoDePagamento === "Dinheiro"){  ///formas de pagamento            
-            total = total * 0.95       
-            return "Voce vai pagar " + total;                        
+                   
+            return "R$ " + total * 0.95;                        
         }           
         else if (metodoDePagamento === "credito") {
                 return "R$" + total * 1.03;                
@@ -23,12 +23,12 @@ class CaixaDaLanchonete {
 
     
     retornaValorTotalItem(itens);{ 
-        total = 0; //conferir o total dos itens e suas verificações
+        var total = 0; //conferir o total dos itens e suas verificações
         if (total.sum(itens) ===0){
             console.log("Quantidade inválida")
         }       
         itens.forEach(posicaoIten => {
-            produtos = posicaoIten.split(",")})
+            var produtos = posicaoIten.split(",")})
             switch (produtos[0])  {
                 case "cafe":
                     total += 3.0;   
@@ -64,9 +64,9 @@ class CaixaDaLanchonete {
     
     verificarItens(itens); {
         itens.forEach(verificacao => {
-            const itemVerificado = verificacao.split(",");
+            var itemVerificado = verificacao.split(",");
             if (itemVerificado.includes("chantily")) {
-                if (!itens.includes("cafe,1")) {
+                if (!itens.includes("cafe")) {
                     console.log("Para adicionar chantily você deve pedir um café.");
                 }
             } else if (itemVerificado.includes("queijo")) {
