@@ -1,29 +1,40 @@
-//   | codigo    | descrição                   | valor   |
-//   |-----------|-----------------------------|---------|
-//   | cafe      | Café                        | R$ 3,00 |
-//   | chantily  | Chantily (extra do Café)    | R$ 1,50 |
-//   | suco      | Suco Natural                | R$ 6,20 |
-//   | sanduiche | Sanduíche                   | R$ 6,50 |
-//   | queijo    | Queijo (extra do Sanduíche) | R$ 2,00 |
-//   | salgado   | Salgado                     | R$ 7,25 |
-//   | combo1    | 1 Suco e 1 Sanduíche        | R$ 9,50 |
-//   | combo2    | 1 Café e 1 Sanduíche        | R$ 7,50 |
-
-
 class CaixaDaLanchonete {
 
     calcularValorDaCompra(metodoDePagamento, itens) {
         
-        if (itens.length === 0){
-            return "Forma de pagamento inválida!"
-        }
-        console.log(itens);
-        total = 0;
-        itens.forEach(element => {
-            produtos = element.split(",")
-            switch (produtos[0]) {
+        total = retornaValorTotalItem(itens)
+        
+        if (metodoDePagamento === "Dinheiro"){  ///formas de pagamento            
+            total = total * 0.95       
+            return "Voce vai pagar " + total;                        
+        }           
+        else if (metodoDePagamento === "credito") {
+                return "R$" + total * 1.03;                
+                }
+            
+        else if (metodoDePagamento === "debito" ){
+                console.log("Você ira pagar total " + total)
+            }
+        else{
+            console.log("forma de pagamento inválida")
+            }
+        }       
+    }
+
+    
+    retornaValorTotalItem(itens);{ 
+        total = 0; //conferir o total dos itens e suas verificações
+        if (total.sum(itens) ===0){
+            console.log("Quantidade inválida")
+        }       
+        itens.forEach(posicaoIten => {
+            produtos = posicaoIten.split(",")})
+            switch (produtos[0])  {
                 case "cafe":
-                    total += 3;   
+                    total += 3.0;   
+                    break;
+                case "chantily":
+                    total += 1.50;
                     break;
                 case "suco":
                     total += 6.2;   
@@ -31,19 +42,41 @@ class CaixaDaLanchonete {
                 case "sanduiche":
                     total += 6.5;  
                     break;
-                default:
+                case "queijo":
+                    total += 2.00
                     break;
-            }
-            
-        });
-
-        if (metodoDePagamento === "credito") {
-            return "R$" + total + 0.09;
+                case "salgado":
+                    total += 7.25
+                    break;
+                case "combo1":
+                    total += 9.50
+                    break;
+                case "combo2":
+                    total += 7.50
+                    break;
+                
+                default:
+                    "Não há itens no carrinho de compra!"
+                    break;
         }
-        returno "R$" + total;
- 
-
+            return total , itens
     }
-}
+    
+    verificarItens(itens); {
+        itens.forEach(verificacao => {
+            const itemVerificado = verificacao.split(",");
+            if (itemVerificado.includes("chantily")) {
+                if (!itens.includes("cafe,1")) {
+                    console.log("Para adicionar chantily você deve pedir um café.");
+                }
+            } else if (itemVerificado.includes("queijo")) {
+                if (!itens.includes("sanduiche,1")) {
+                    console.log("Para adicionar queijo você deve pedir um sanduíche.");
+                }
+            } else {
+                console.log("Item extra não pode ser pedido sem o principal");
+            }
+        });
+    }
 
-export { CaixaDaLanchonete };
+export { CaixaDaLanchonete } ;
